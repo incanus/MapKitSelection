@@ -39,12 +39,10 @@ class ViewController: UIViewController, MKMapViewDelegate {
             self.map.selectAnnotation(annotations[0] as! MKAnnotation, animated: true)
             println("single selection: \(self.map.selectedAnnotations)")
         }
-
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(4 * NSEC_PER_SEC)), dispatch_get_main_queue()) { [unowned self] in
             self.map.selectedAnnotations = annotations.subarrayWithRange(NSRange(location: 1, length: 2)) as! [MKAnnotation]
             println("multiple selection: \(self.map.selectedAnnotations)")
         }
-
     }
 
 }

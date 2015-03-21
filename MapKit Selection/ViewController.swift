@@ -25,7 +25,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
                 properties = feature["properties"] as? NSDictionary,
                 title = properties["title"] as? String {
                 annotations.addObject({
-                    let annotation = MKPointAnnotation();
+                    let annotation = MKPointAnnotation()
                     annotation.coordinate = CLLocationCoordinate2D(latitude: coordinates[1] as! Double,
                         longitude: coordinates[0] as! Double)
                     annotation.title = title
@@ -35,6 +35,9 @@ class ViewController: UIViewController, MKMapViewDelegate {
         }
         map.addAnnotations(annotations as [AnyObject])
         map.showAnnotations(map.annotations, animated: false)
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(2 * NSEC_PER_SEC)), dispatch_get_main_queue()) { [unowned self] in
+            self.map.selectAnnotation(annotations[0] as! MKAnnotation, animated: true)
+        }
     }
 
 }
